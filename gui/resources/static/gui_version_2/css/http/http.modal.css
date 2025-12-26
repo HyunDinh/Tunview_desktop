@@ -1,0 +1,335 @@
+
+#context-menu {
+  position: fixed;
+  z-index: 9999;
+  background-color: #3c3f41;
+  border: 1px solid #515151;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  padding: 5px 0;
+  min-width: 160px;
+  border-radius: 4px;
+  display: none;
+}
+
+#context-menu.hidden {
+  display: none;
+}
+
+.context-item {
+  padding: 8px 12px;
+  color: #bbbfc4;
+  font-size: 13px;
+  cursor: pointer;
+  display: block;
+}
+
+.context-item:hover {
+  background-color: #2f65ca;
+  color: white;
+}
+
+.context-item {
+  padding: 8px 15px;
+  color: #bbbfc4;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.context-item:hover {
+  background-color: #2f65ca;
+  color: white;
+}
+
+.context-item.danger:hover {
+  background-color: #c82333;
+}
+
+
+/* Config Modal Specific */
+.config-large {
+  width: 850px !important;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.config-grid {
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.config-section {
+  background: #2b2b2b;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #45494a;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.env-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 2fr 40px;
+  gap: 10px;
+  align-items: center;
+  background: #323232;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  transition: 0.2s;
+}
+
+.env-item:hover {
+  border-color: #007acc;
+}
+
+.env-item.active-env {
+  background: #1e2a3a;
+  border-color: #007acc;
+}
+
+.btn-delete-env {
+  background: none;
+  border: none;
+  color: #ff5555;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-delete-env:hover {
+  color: #ff0000;
+}
+
+.radio-active {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #5e6060;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  margin-right: 10px;
+}
+
+/* Hiệu ứng khi được Check */
+.radio-active:checked {
+  border-color: #007acc;
+  background-color: rgba(0, 122, 204, 0.1);
+}
+
+/* Chấm tròn nhỏ bên trong khi active */
+.radio-active:checked::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #007acc;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0 0 5px rgba(0, 122, 204, 0.8);
+}
+
+/* Hiệu ứng hover cho radio */
+.radio-active:hover {
+  border-color: #007acc;
+  box-shadow: 0 0 3px rgba(0, 122, 204, 0.5);
+}
+
+.env-item.active-env {
+  background: #1e2a3a !important;
+  /* Xanh đậm nhẹ */
+  border: 1px solid #007acc !important;
+}
+
+.env-item input[type="text"] {
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  color: #dcdcdc;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.env-item input[type="text"]:focus {
+  border-color: #007acc;
+  background: #000;
+  outline: none;
+}
+
+.config-section .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.config-section label {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.config-section input[type="number"],
+.config-section input[type="text"] {
+  background-color: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  color: #dcdcdc;
+  padding: 8px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.config-section input:focus {
+  outline: none;
+  border-color: #007acc;
+  background-color: #000;
+}
+
+
+/* here */
+
+#case-modal .modal-content {
+  background-color: #3c3f41;
+  color: #bbbfc4;
+  border: 1px solid #515151;
+  border-radius: 6px;
+  padding: 20px;
+  width: 750px !important;
+}
+
+.form-group label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 5px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+#case-modal input[type="text"],
+#case-modal input[type="number"],
+#case-modal select,
+#case-modal textarea {
+  width: 100%;
+  background-color: #2b2b2b;
+  border: 1px solid #45494a;
+  color: #a9b7c6;
+  padding: 6px 8px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+}
+
+#case-modal input[type="number"]::-webkit-inner-spin-button,
+#case-modal input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#case-modal input:focus,
+#case-modal select:focus,
+#case-modal textarea:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.new-case-modal-content {
+  margin-bottom: 30px !important;
+}
+
+#cancel-case-btn {
+  background-color: transparent;
+  color: #bbbfc4;
+  border: 1px solid #5e6060;
+  padding: 6px 15px;
+  cursor: pointer;
+}
+
+#cancel-case-btn:hover {
+  background-color: #4e5052;
+}
+
+
+#validation-table {
+  margin-top: 10px;
+  border: 1px solid #45494a;
+  width: 100%;
+}
+
+#validation-table th {
+  background-color: #313335;
+  color: #888;
+  font-size: 11px;
+  padding: 5px;
+  text-align: left;
+}
+
+#validation-table td {
+  padding: 4px;
+  border-bottom: 1px solid #45494a;
+}
+
+#validation-table button {
+  background: transparent;
+  border: none;
+  color: #ff5555;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+#add-validation-btn {
+  background-color: #365880;
+  color: #fff;
+  border: none;
+  padding: 2px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+#add-validation-btn:hover {
+  background-color: #436995;
+}
+
+#validation-table-edit {
+  margin-top: 5px;
+  background-color: #252525;
+  border: 1px solid #3c3c3c;
+}
+
+#validation-table-edit th {
+  font-size: 11px;
+  color: #888;
+  background-color: #323232;
+  padding: 6px;
+}
+
+#validation-table-edit td {
+  padding: 4px;
+  border-bottom: 1px solid #3c3c3c;
+}

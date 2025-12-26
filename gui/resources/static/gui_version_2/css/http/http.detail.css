@@ -1,0 +1,226 @@
+.http-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 5px;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #45494a;
+  padding-bottom: 5px;
+}
+
+.detail-header h3 {
+  color: #bbbfc4;
+  font-size: 16px;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.detail-content {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #1e1e1e;
+  border: 1px solid #45494a;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.cases-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: #a9b7c6;
+}
+
+.cases-table th,
+.cases-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #45494a;
+}
+
+.cases-table th {
+  background-color: var(--main-color-2);
+  font-weight: bold;
+}
+
+.cases-table tr:hover {
+  background-color: #4e5254;
+}
+
+.cases-table pre {
+  background: #2b2b2b;
+  padding: 4px;
+  border-radius: 2px;
+  max-height: 60px;
+  overflow-y: auto;
+}
+
+.case-detail {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.case-field {
+  margin-bottom: 8px;
+  padding: 4px;
+  border-left: 2px solid #007acc;
+  background-color: #2b2b2b;
+}
+
+.case-field strong {
+  color: #9cdcfe;
+}
+
+.case-field .value {
+  color: #ce9178;
+}
+
+
+
+.edit-case-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 5px;
+}
+
+.edit-case-form .case-field {
+  border-left: 3px solid #007acc;
+  background-color: #252525;
+  padding: 10px;
+  margin-bottom: 0;
+  /* Ghi đè margin cũ */
+  border-radius: 0 4px 4px 0;
+}
+
+.edit-case-form label {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.edit-case-form input[type="text"],
+.edit-case-form select,
+.edit-case-form textarea {
+  width: 100%;
+  background-color: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  color: #dcdcdc;
+  padding: 8px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+
+.edit-case-form input:focus,
+.edit-case-form textarea:focus {
+  outline: none;
+  border-color: #007acc;
+  background-color: #000;
+}
+
+#add-val-row-edit {
+  align-self: flex-start;
+  background-color: #365880;
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: -10px;
+  transition: background 0.2s;
+}
+
+#add-val-row-edit:hover {
+  background-color: #436995;
+}
+
+/* Style cho input số (Response Time) */
+.edit-case-form input[type="number"] {
+  width: 100%;
+  background-color: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  color: #ff9800; /* Màu cam để phân biệt với text thường */
+  padding: 8px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Loại bỏ mũi tên tăng giảm mặc định trên Chrome/Safari để tiết kiệm diện tích */
+.edit-case-form input[type="number"]::-webkit-inner-spin-button,
+.edit-case-form input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Style cho nút xóa dòng trong bảng Validation */
+.delete-row-btn {
+  background: transparent;
+  border: none;
+  color: #ff5555;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+.delete-row-btn:hover {
+  color: #ff0000;
+  transform: scale(1.2);
+}
+
+/* Helper class để layout các ô nhập liệu trên cùng một hàng */
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.flex-1 { flex: 1; }
+.flex-2 { flex: 2; }
+.flex-3 { flex: 3; }
+
+/* Tùy chỉnh riêng cho bảng Validation trong phần Detail */
+#validation-table-edit {
+  margin-top: 5px;
+  background-color: #1a1a1a;
+}
+
+.v-field-edit, .v-data-edit {
+  border: none !important;
+  border-bottom: 1px solid #333 !important;
+  border-radius: 0 !important;
+}
+
+.v-field-edit:focus, .v-data-edit:focus {
+  border-bottom-color: #007acc !important;
+}

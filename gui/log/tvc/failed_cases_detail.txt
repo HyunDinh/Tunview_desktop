@@ -1,0 +1,212 @@
+================================================================================
+[CASE FAILED] Index: 7, Name: Insert defense profile
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[400], Expected=[200]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[mainC updated]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[database updated]
+
+--- REQUEST DETAILS ---
+Method: POST
+API Path: v1/defense/profiles/
+Request Body:
+{"DefenseProfileName":"TestProfileName_001","DefenseProfileDescription":"TestProfileDescription","DetectionTime":1,"DefenseMode":"classified","ICMPFloodEnable":true,"ICMPFloodThreshold":1000,"ICMPFloodRate":1000,"TCPFragmentEnable":true,"UDPFragmentEnable":true,"SYNFloodEnable":true,"SYNFloodSYNThreshold":1000,"SYNFloodACKThreshold":1000,"SYNFloodWhiteListTimeOut":30,"UDPFloodEnable":true,"UDPFloodThreshold":1000,"UDPFloodRate":1000,"DNSFloodEnable":true,"DNSFloodThreshold":1000,"LandAttackEnable":true,"IPSecIKEEnable":true,"IPSecIKEThreshold":1000,"HTTPFloodEnable":true,"HTTPSFloodEnable":true}
+
+--- RESPONSE DETAILS ---
+Status Code: 400
+Response Time: 13ms
+Response Body:
+{"message":"Profile name already exists","progress":""}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 8, Name: Update defense profile
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[database updated], Expected=[mainC updated]
+
+--- REQUEST DETAILS ---
+Method: PATCH
+API Path: v1/defense/profiles/4
+Request Body:
+{"DefenseMode":"classified","SYNFloodEnable":0,"TCPFragmentEnable":0,"LandAttackEnable":0,"UDPFloodEnable":0,"UDPFragmentEnable":0,"IPSecIKEEnable":0,"ICMPFloodEnable":0,"DNSFloodEnable":0,"HTTPFloodEnable":0,"HTTPSFloodEnable":0}
+
+--- RESPONSE DETAILS ---
+Status Code: 200
+Response Time: 25ms
+Response Body:
+{"success":true,"message":"Defense profile updated successfully (no changes to mainC)","progress":"database updated","estimatedTime":0,"data":{"DefenseProfileId":4,"UserId":1,"DefenseProfileName":"nhat","DefenseProfileDescription":"123456","DefenseProfileCreateTime":"2025/05/12 14:32:30","DefenseProfileLastModified":"2025/12/26 14:10:30","DefenseProfileUsingTime":"[{\"name\":\"eth2\",\"date\":\"2025/12/26 13:49:06\"}]","DefenseProfileType":"UserProfile","DefenseProfileStatus":"Active","DetectionTime":2,"DefenseMode":"classified","ICMPFloodEnable":0,"ICMPFloodThreshold":1000,"ICMPFloodRate":1000,"SYNFloodEnable":0,"SYNFloodSYNThreshold":1000,"SYNFloodACKThreshold":1000,"SYNFloodWhiteListTimeOut":30,"UDPFloodEnable":0,"UDPFloodThreshold":1000,"UDPFloodRate":1000,"DNSFloodEnable":0,"DNSFloodThreshold":1000,"LandAttackEnable":0,"IPSecIKEEnable":0,"IPSecIKEThreshold":1000,"TCPFragmentEnable":0,"UDPFragmentEnable":0,"HTTPFloodEnable":0,"HTTPSFloodEnable":0}}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 10, Name: Delete defense profile
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[500], Expected=[200]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[database updated]
+
+--- REQUEST DETAILS ---
+Method: DELETE
+API Path: v1/defense/profiles/17
+Request Body:
+{}
+
+--- RESPONSE DETAILS ---
+Status Code: 500
+Response Time: 16ms
+Response Body:
+{"message":"Delete defense profile failed","progress":""}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 13, Name: Update device interfaces
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[mainC updated]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[database updated]
+
+--- REQUEST DETAILS ---
+Method: PATCH
+API Path: v1/defense/interfaces/2
+Request Body:
+{"ports":[{"InterfaceId":2,"InterfaceName":"eth2","InterfaceType":"outbound","InterfaceProtectionMode":"IP","DefenseProfileId":4}]}
+
+--- RESPONSE DETAILS ---
+Status Code: 200
+Response Time: 5ms
+Response Body:
+{"message":"No changes detected, no command sent to MainC","estimatedTime":0,"progress":"","data":[]}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 18, Name: Insert IPSec profile without uploading certificates
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[400], Expected=[200]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[[TVC]: Field 'progress' not found. Please check whether this custom field is configured in the API response configuration.], Expected=[no certs uploaded]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[[TVC]: Field 'progress' not found. Please check whether this custom field is configured in the API response configuration.], Expected=[mainC updated]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[[TVC]: Field 'progress' not found. Please check whether this custom field is configured in the API response configuration.], Expected=[database updated]
+
+--- REQUEST DETAILS ---
+Method: POST
+API Path: v1/defense/ipsec/combined
+Request Body:
+{"profileData":"{\"ProfileName\":\"NoCertProfile_001\",\"ProfileDescription\":\"Profile without certificates\",\"LocalGateway\":\"192.168.1.1\",\"SubnetLocalGateway\":\"192.168.1.0/24\",\"RemoteGateway\":\"203.0.113.1\",\"SubnetRemoteGateway\":\"10.0.0.0/16\",\"ConnectionCount\":1,\"IKEVersion\":\"2\",\"Mode\":\"main\",\"ESPAHProtocol\":\"esp\",\"EncryptionAlgorithm\":\"aes256\",\"HashAlgorithm\":\"sha256\",\"Enable\":true}"}
+
+--- RESPONSE DETAILS ---
+Status Code: 400
+Response Time: 3ms
+Response Body:
+{"message":"ProfileName already exists"}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 19, Name: Update ipsec profile
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[404], Expected=[200]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[mainC updated]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[database updated]
+
+--- REQUEST DETAILS ---
+Method: PATCH
+API Path: v1/defense/ipsec/1
+Request Body:
+{"ProfileName":"IpSec Profile For Testing","ProfileDescription":"Sample description","LocalGateway":"1.1.1.1","SubnetLocalGateway":"1.1.1.1","RemoteGateway":"1.1.1.1;1.1.1.1;1.1.1.1","SubnetRemoteGateway":"1.1.1.1;1.1.1.1;1.1.1.1","ConnectionCount":3,"IKEVersion":"v2","Mode":"transport","ESPAHProtocol":"ESP","IKEReauthTime":360,"EncryptionAlgorithm":"aes-192","HashAlgorithm":"md5","ReKeyTime":8640,"Enable":0}
+
+--- RESPONSE DETAILS ---
+Status Code: 404
+Response Time: 3ms
+Response Body:
+{"success":false,"message":"IPSec profile not found","progress":""}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 20, Name: Delete ipsec profile
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[404], Expected=[200]
+
+--- REQUEST DETAILS ---
+Method: DELETE
+API Path: v1/defense/ipsec/1
+Request Body:
+{}
+
+--- RESPONSE DETAILS ---
+Status Code: 404
+Response Time: 13ms
+Response Body:
+{"message":"IPSec profile not found"}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 26, Name: Delete network addresses by ids
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[404], Expected=[200]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[mainC updated]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[database updated]
+
+--- REQUEST DETAILS ---
+Method: POST
+API Path: v1/defense/address/bulk-delete
+Request Body:
+{"addressIds":[359,360]}
+
+--- RESPONSE DETAILS ---
+Status Code: 404
+Response Time: 4ms
+Response Body:
+{"message":"No valid addresses found to delete","progress":""}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 34, Name: Create new config profile 02
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[409], Expected=[201]
+
+--- REQUEST DETAILS ---
+Method: POST
+API Path: v1/config/profiles/create
+Request Body:
+{"name":"TestProfile"}
+
+--- RESPONSE DETAILS ---
+Status Code: 409
+Response Time: 6ms
+Response Body:
+{"message":"Profile name already exists"}
+
+--------------------------------------------------------------------------------
+================================================================================
+[CASE FAILED] Index: 42, Name: Delete config profile
+================================================================================
+
+--- VALIDATION FAILURES ---
+Validation: Response code => Response code not matched - Actual=[404], Expected=[200]
+Validation: JSON field [progress] => Custom field data not matched with key [progress] - Actual=[], Expected=[database updated]
+
+--- REQUEST DETAILS ---
+Method: DELETE
+API Path: v1/config/profiles/1
+Request Body:
+{}
+
+--- RESPONSE DETAILS ---
+Status Code: 404
+Response Time: 13ms
+Response Body:
+{"message":"Config profile not found","progress":""}
+
+--------------------------------------------------------------------------------

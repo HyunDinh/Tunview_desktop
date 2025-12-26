@@ -1,0 +1,84 @@
+.http-tree {
+  width: 500px;
+  /* Rộng hơn tí cho tree sâu */
+  background-color: var(--main-color-2);
+  border-right: 1px solid #45494a;
+  padding: 10px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.http-tree h3 {
+  color: #bbbfc4;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #45494a;
+}
+
+.http-tree .tree-node::before {
+  content: none !important;
+  /* Xóa icon CSS, tránh double với HTML */
+}
+
+.http-tree .tree-node.file {
+  cursor: pointer;
+}
+
+.http-tree .tree-node {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tree-checkbox {
+  /* spacing */
+  margin-right: 6px;
+
+  /* size */
+  width: 16px;
+  height: 16px;
+  transform: scale(1.1);
+
+  /* interaction */
+  cursor: pointer;
+
+  /* modern styling */
+  accent-color: #4f46e5; /* Indigo / VSCode-like */
+
+  /* UX */
+  vertical-align: middle;
+}
+
+.tree-checkbox:focus-visible {
+  outline: 2px solid rgba(79, 70, 229, 0.4);
+  outline-offset: 2px;
+}
+
+.tree-node:hover .tree-checkbox {
+  outline: 1px solid #007acc;
+}
+
+.draggable-module, .draggable-group, .draggable-case { cursor: grab; }
+.draggable-module.dragging, .draggable-group.dragging, .draggable-case.dragging { 
+  opacity: 0.5; 
+  background: rgba(255, 255, 255, 0.1); 
+  border: 1px dashed #666; 
+}
+.drag-placeholder { 
+  height: 3px; 
+  background: #ff9800; 
+  margin: 4px 0; 
+  border-radius: 2px; 
+  list-style: none; 
+}
+
+.tree-children {
+  padding-left: 20px;
+  list-style: none;
+  margin: 0;
+}
+
+.tree-children.hidden {
+  display: none;
+}

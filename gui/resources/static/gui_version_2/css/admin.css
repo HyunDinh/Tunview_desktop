@@ -1,0 +1,158 @@
+/* Page Admin - IDE-like Split View */
+.admin-view {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--main-color-1);
+  gap: 5px;
+}
+
+.admin-tree {
+  width: 220px; /* Fixed width như file explorer in VS Code */
+  background-color: var(--main-color-2);
+  border-right: 1px solid #45494a;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.admin-tree h3 {
+  color: #bbbfc4;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #45494a;
+}
+
+.tree-view {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px; /* Nhỏ gọn như IDE */
+}
+
+.tree-view li {
+  margin: 1px 0;
+  position: relative; /* Để padding-left cho indent */
+}
+
+.tree-node {
+  cursor: pointer;
+  color: #a9b7c6;
+  font-size: 13px;
+  padding: 2px 0 2px 16px; /* Indent cho children */
+  border-radius: 3px;
+  transition: background-color 0.2s;
+  display: block;
+  position: relative;
+}
+
+.tree-node:hover {
+  background-color: #4e5254;
+}
+
+.tree-node.selected {
+  background-color: #007acc;
+  color: #fff;
+}
+
+.tree-node.folder::before {
+  content: "📁 "; /* Icon folder */
+  margin-right: 4px;
+}
+
+.tree-node.file::before {
+  content: "📄 "; /* Icon file */
+  margin-right: 4px;
+}
+
+/* Expand/Collapse Arrow */
+.tree-node.folder::after {
+  content: "▶"; /* Arrow phải khi collapsed */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #666;
+  transition: transform 0.2s;
+}
+
+.tree-node.folder.expanded::after {
+  transform: translateY(-50%) rotate(90deg); /* Arrow xuống khi expanded */
+}
+
+/* Hidden children */
+.tree-children.hidden {
+  display: none;
+}
+
+/* Indent children */
+.tree-children {
+  padding-left: 16px;
+  border-left: 1px dashed #45494a; /* Dotted line như tree in VS Code */
+}
+
+.admin-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 5px;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor-header span {
+  color: #bbbfc4;
+  font-size: 14px;
+}
+
+#save-file-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#save-file-btn:hover {
+  background-color: #218838;
+}
+
+#file-editor {
+  flex: 1;
+  width: 100%;
+  background-color: #1e1e1e; /* Dark editor bg */
+  color: #d4d4d4; /* Light text */
+  border: 1px solid #45494a;
+  border-radius: 3px;
+  padding: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: none;
+  overflow-y: auto;
+  white-space: pre; /* Giữ format JSON/text */
+  overflow-wrap: normal;
+}
+
+/* Syntax highlight cơ bản cho JSON (thêm class nếu cần) */
+.json-key {
+  color: #9cdcfe;
+}
+.json-string {
+  color: #ce9178;
+}
+.json-number {
+  color: #b5cea8;
+}
+.json-boolean {
+  color: #569cd6;
+}

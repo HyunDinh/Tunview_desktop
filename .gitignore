@@ -1,0 +1,17 @@
+# Node / Electron
+gui/node_modules/
+
+# Build output
+gui/dist/
+gui/build/
+gui/out/
+
+# Env & OS
+gui/.env
+gui/.DS_Store
+gui/Thumbs.db
+
+# Logs
+gui/npm-debug.log*
+gui/yarn-debug.log*
+gui/pnpm-debug.log*

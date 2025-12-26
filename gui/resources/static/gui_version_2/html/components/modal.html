@@ -1,0 +1,173 @@
+<div id="context-menu" class="hidden">
+    <div id="ctx-new-group" class="context-item">New Group</div>
+    <div id="ctx-delete-module" class="context-item danger">Delete Module</div>
+    <div id="ctx-new-case" class="context-item hidden">New Case</div>
+    <div id="ctx-delete-group" class="context-item danger hidden">Delete Group</div>
+    <div id="ctx-delete-case" class="context-item danger">Delete Case</div>
+</div>
+<div id="module-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Create New Module</h2>
+        <label for="module-name-input">Module Name:</label>
+        <input type="text" id="module-name-input" placeholder="e.g. Auth_Service, Payment_API..." />
+        <div class="buttons" style="margin-top: 20px">
+            <button id="save-module-btn" class="run-btn">Save</button>
+            <button id="cancel-module-btn" class="stop-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+<div id="group-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Create New Group</h2>
+        <p id="target-module-label" style="font-size: 11px; color: #007acc"></p>
+        <label for="group-name-input">Group Name:</label>
+        <input type="text" id="group-name-input" placeholder="e.g. Login_Tests, User_Profile..." />
+        <div class="buttons" style="margin-top: 20px">
+            <button id="save-group-btn" class="run-btn">Save</button>
+            <button id="cancel-group-btn" class="stop-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+<div id="delete-confirm-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2 style="color: #ff5555">Confirm Delete</h2>
+        <p id="delete-confirm-message" style="margin: 15px 0; color: #bbbfc4"></p>
+        <div class="buttons">
+            <button id="confirm-delete-btn" class="stop-btn">Delete</button>
+            <button id="cancel-delete-btn" class="run-btn" style="background-color: #45494a">Cancel</button>
+        </div>
+    </div>
+</div>
+<div id="new-workspace-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Create New Workspace</h2>
+        <label for="workspace-name">Workspace Name:</label>
+        <input type="text" id="workspace-name" placeholder="Enter name (e.g., my_workspace)" />
+        <label for="folder-path">Folder Path:</label>
+        <div class="path-group">
+            <input type="text" id="folder-path" readonly placeholder="Select a folder..." />
+            <button class="margin_15px" id="select-folder">Browse</button>
+        </div>
+        <div class="buttons">
+            <button id="save-btn">Save</button>
+            <button id="cancel-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+<div id="case-modal" class="modal hidden">
+    <div class="modal-content large">
+        <h3 class="new-case-modal-content">
+            New Case for:
+            <span id="target-module-label" style="color: #ff9800"></span> /
+            <span id="target-group-label" style="color: #007acc"></span>
+        </h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Test Name*</label>
+                <input type="text" id="case-name" placeholder="Example : login successful" />
+            </div>
+            <div class="form-group">
+                <label>Test ID*</label>
+                <input type="text" id="case-test-id" placeholder="Example : testcase_001" />
+            </div>
+            <div class="form-group">
+                <label>Method*</label>
+                <select id="case-method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="PATCH">PATCH</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+            <div class="form-group full-width">
+                <label>API Path*</label>
+                <input type="text" id="case-api" placeholder="Example : mywebsite/login" />
+            </div>
+            <div class="form-group">
+                <label>Auth Token*</label>
+                <select id="case-auth">
+                    <option value="NONE">NONE</option>
+                    <option value="GET">GET</option>
+                    <option value="SET">SET</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Expected Code*</label>
+                <input type="text" id="case-code" value="200" />
+            </div>
+            <div class="new-case-modal-content form-group">
+                <label>Expected Response Time (s)</label>
+                <input type="number" id="case-response-time" placeholder="Example: 5" />
+            </div>
+        </div>
+
+        <div id="body-section" class="hidden">
+            <label>Body (JSON)</label>
+            <textarea id="case-body" rows="4"></textarea>
+        </div>
+
+        <div class="validation-section">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px">
+                <label>Custom Validations</label>
+                <button id="add-validation-btn" type="button">Add new validation</button>
+            </div>
+            <table id="validation-table">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Expected Data</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="modal-footer">
+            <button id="cancel-case-btn">Cancel</button>
+            <button id="save-case-btn" class="btn-primary">Save Case</button>
+        </div>
+    </div>
+</div>
+<div id="config-modal" class="modal hidden">
+    <div class="modal-content config-large">
+        <div class="modal-header">
+            <h2><img src="../../../assets/sidebar/edit_icon.png" style="width:16px; margin-right:8px;">Http
+                scenario configuration</h2>
+            <button id="add-env-btn" class="run-btn" style="background-color: #007acc">+ Add Environment</button>
+        </div>
+
+        <div class="config-grid">
+            <div class="config-section">
+                <h3 class="section-title">Global Settings</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Max Retries</label>
+                        <input type="number" id="cfg-max-retries" />
+                    </div>
+                    <div class="form-group">
+                        <label>Connect Timeout (s)</label>
+                        <input type="number" id="cfg-connect-timeout" />
+                    </div>
+                    <div class="form-group">
+                        <label>Read Timeout (ms)</label>
+                        <input type="number" id="cfg-read-timeout" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="section-title">Environments</h3>
+                <div id="env-list-container">
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button id="cancel-config-btn">Cancel</button>
+            <button id="save-config-btn" class="btn-primary">Save Changes</button>
+        </div>
+    </div>
+</div>
+<div id="notification-container" class="notification-container"></div>

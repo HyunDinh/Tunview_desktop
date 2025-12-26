@@ -1,0 +1,542 @@
+:root {
+  --main-color-1: #000000;
+  --main-color-2: #2b2b2b;
+  --left-side-bar-width: 100px;
+  --right-side-bar-width: 80px;
+  --side-item-margin: 4px;
+}
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+button,
+input,
+select {
+  font-family: "JetBrains Mono", monospace;
+}
+
+* {
+  scrollbar-width: none; /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome / Electron */
+}
+
+html,
+body {
+  font-family: "JetBrains Mono", monospace; /* Use a font similar to IntelliJ's default */
+  background-color: var(--main-color-1); /* Dark background like Darcula theme */
+  color: #a9b7c6; /* Light text color */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  background-color: var(--main-color-2);
+  color: #bbbfc4;
+  height: 40px; /* Thinner like IDE toolbars */
+  padding: 0 10px 0 0;
+  -webkit-app-region: drag;
+  border-bottom: 1px solid #45494a;
+  position: relative;
+}
+
+.logo-box {
+  width: calc(var(--left-side-bar-width));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main_logo {
+  height: 20px;
+  width: auto;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.title-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  -webkit-app-region: no-drag;
+}
+
+.btn {
+  width: 25px;
+  height: 25px;
+  border-radius: 20%;
+  cursor: pointer;
+  border: 1px solid #45494a;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  background-color: var(--main-color-2);
+  border-right: 1px solid #45494a; /* Subtle borders */
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.left-sidebar {
+  width: var(--left-side-bar-width);
+  border-right: 1px solid #45494a;
+}
+
+.right-sidebar {
+  width: var(--right-side-bar-width);
+  border-left: 1px solid #45494a;
+}
+
+.side-item {
+  padding: 8px 16px;
+  color: #bbbfc4;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease; /* Thêm transition cho mượt hơn */
+  border-bottom: 1px solid #45494a;
+  margin: 0 var(--side-item-margin) var(--side-item-margin) var(--side-item-margin);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Để border-left work */
+  max-height: 30px;
+  overflow: hidden;
+}
+
+.side-item:hover {
+  background-color: #4e5254; /* Hover like in IntelliJ */
+}
+
+.side-item:active {
+  background-color: #007acc !important; /* Force active trên selected nếu cần */
+  color: #ffffff !important;
+}
+
+.side-item.selected {
+  background-color: #007acc;
+  color: #ffffff;
+  border-left: 3px solid #ffffff; /* Nổi bật bên trái, giống IDE tab */
+  box-shadow: inset -2px 0 0 #005f9e; /* Shadow nhẹ bên trong */
+}
+
+.side-item.selected:hover {
+  background-color: #006ba6; /* Hover darker trên selected */
+  transform: translateX(1px); /* Nhẹ nhàng shift để feedback */
+}
+
+.side-item img {
+  height: 100%;
+  width: auto;
+}
+
+.right-sidebar .side-item.selected {
+  border-left: none;
+  border-right: 3px solid #ffffff;
+}
+
+/* Content - Editor area like in IntelliJ */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--main-color-1);
+  color: #a9b7c6;
+
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.content h2 {
+  color: #bbbfc4;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.content p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  -webkit-app-region: no-drag;
+}
+
+.hidden {
+  display: none;
+}
+
+.page {
+  display: none;
+  height: 100%;
+  overflow-y: none;
+}
+.page.active {
+  display: flex;
+}
+
+#intro-page {
+  flex-direction: column;
+  justify-content: center;
+  padding: 5vh 13vw;
+  height: 100%;
+}
+
+
+.workspace-btn {
+  background-color: #3a3a3a;
+  border: 1px solid #555;
+  padding: 4px 10px;
+  color: #ccc;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 200px;
+}
+
+.workspace-btn:hover {
+  background-color: #4a4a4a;
+}
+
+.arrow {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.workspace-dropdown {
+  position: absolute;
+  top: 35px;
+  left: 110px;
+  background-color: #2b2b2b;
+  border: 1px solid #444;
+  width: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.dropdown-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  color: #bbb;
+  font-size: 13px;
+}
+
+.dropdown-item:hover {
+  background-color: #4e5254;
+  color: white;
+}
+
+/* MODAL STYLES */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Overlay tối */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: var(--main-color-2);
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  border: 1px solid #45494a;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h2 {
+  color: #bbbfc4;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 5px;
+  color: #bbbfc4;
+  font-size: 13px;
+}
+
+.modal input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  background-color: #3a3a3a;
+  border: 1px solid #555;
+  color: #ccc;
+  border-radius: 4px;
+}
+
+.path-group {
+  display: flex;
+  gap: 10px;
+}
+
+#folder-path {
+  flex: 1;
+}
+
+.modal button {
+  background-color: #3a3a3a;
+  border: 1px solid #555;
+  padding: 8px 12px;
+  color: #ccc;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.modal button:hover {
+  background-color: #4a4a4a;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#save-btn {
+  background-color: #007acc;
+  color: #fff;
+}
+
+#save-btn:hover {
+  background-color: #005f9e;
+}
+
+.margin_15px {
+  margin-bottom: 15px;
+}
+
+.sidebar.hidden {
+  display: none;
+}
+
+.notification-container {
+  position: fixed;
+  top: 60px; /* Tăng cách titlebar để tránh overlap */
+  right: 20px;
+  width: 320px; /* Tăng nhẹ cho icon */
+  max-width: 90vw; /* Responsive cho mobile/small screen */
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Giảm gap cho compact hơn */
+  align-items: flex-end; /* Align right để stack đẹp */
+}
+
+.notification {
+  background-color: #3a3a3a;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px; /* Tăng radius cho mượt */
+  border: 1px solid #555;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Shadow mạnh hơn */
+  font-size: 13px;
+  min-height: 20px;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(110%) scale(0.95); /* Bắt đầu ngoài và scale nhỏ */
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Easing mượt */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.notification.success {
+  background-color: #28a745;
+  border-color: #20c997;
+}
+
+.notification.error {
+  background-color: #dc3545;
+  border-color: #fd7e14;
+}
+
+.notification.warning {
+  background-color: #ffc107;
+  border-color: #e68500;
+  color: #212529; /* Text tối cho warning sáng */
+}
+
+.notification.info {
+  background-color: #007acc;
+  border-color: #0056b3;
+}
+
+.notif-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.notif-icon {
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 16px;
+  text-align: center;
+}
+
+.notif-message {
+  line-height: 1.3;
+}
+
+.notification .close-btn {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.notification .close-btn:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.notification:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transform: translateX(0) scale(1.02); /* Nhẹ nhàng scale khi hover */
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(110%) scale(0.95);
+  }
+}
+
+.notification.removing {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.av-btn {
+  margin-top: auto;
+  font-weight: bold;
+  font-size: 11px;
+  border-top: 1px solid #45494a;
+  padding: none !important;
+}
+
+.av-btn.selected {
+  color: #fff;
+  border-left: 3px solid #fff;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.side-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-item {
+  gap: 8px;
+  font-weight: bold;
+}
+
+.main-item .arrow {
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.main-item.open .arrow {
+  transform: rotate(90deg);
+}
+
+.sub-menu {
+  background-color: #1e1e1e;
+}
+
+.sub-item {
+  padding-left: 25px !important;
+  font-size: 12px !important;
+  border-bottom: none !important;
+  margin-bottom: 2px !important;
+}
+
+.sub-item.selected {
+  background-color: #323232 !important;
+  border-left: 2px solid #007acc !important;
+}
+
+#intro-enter-request-h3 {
+  border: white 3px solid;
+  padding: 15px;
+}

@@ -1,0 +1,38 @@
+<div class="http-view">
+    <div class="http-tree">
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #45494a">
+            <h3>HTTP Testcases</h3>
+            <div style="display: flex; gap: 5px">
+                <button id="edit-config-btn" class="run-btn"
+                    style="padding: 4px 8px; font-size: 11px; background-color: #6c757d">Edit config</button>
+                <button id="new-module-btn" class="run-btn"
+                    style="padding: 4px 8px; font-size: 11px; background-color: #28a745">New module</button>
+                <button id="select-all-btn" class="run-btn" style="padding: 4px 8px; font-size: 11px">Select
+                    All</button>
+            </div>
+        </div>
+        <ul id="http-tree-root" class="tree-view"></ul>
+    </div>
+    <div class="http-detail">
+        <div class="detail-header">
+            <h3 id="detail-title">Select a group to view cases</h3>
+            <button id="http-save-btn" class="save-btn" style="display: none">Save Changes</button>
+        </div>
+        <div id="http-detail-content" class="detail-content">
+        </div>
+    </div>
+</div>
+<div id="http-splitter" class="http-splitter"></div>
+<div class="http-run">
+    <div class="run-header">
+        <span id="selected-count">Selected: 0 testcases</span>
+        <div class="run-buttons">
+            <button id="run-btn" class="run-btn">Run</button>
+            <button id="stop-btn" class="stop-btn" disabled>Stop</button>
+        </div>
+    </div>
+    <div id="terminal-output" class="terminal">
+        <div class="terminal-prompt">> Ready to run selected testcases...</div>
+    </div>
+</div>

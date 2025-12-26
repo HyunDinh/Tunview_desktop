@@ -1,0 +1,747 @@
+{
+  "type": "INIT",
+  "globalConfig": {
+    "max_retries": 3,
+    "connect_timeout": 10,
+    "read_timeout": 350,
+    "envs": [
+      {
+        "name": "development",
+        "url": "http://localhost:3010/",
+        "active": true
+      },
+      {
+        "name": "production",
+        "url": "http://10.3.0.124/",
+        "active": false
+      }
+    ],
+    "activeEnv": "development"
+  },
+  "testcases": [
+    {
+      "test_id": "lg_01",
+      "name": "Login with valid credentials",
+      "method": "POST",
+      "api": "v1/auth/login",
+      "body": {
+        "username": "admin",
+        "password": "12345678"
+      },
+      "auth_token": "SET",
+      "expected_code": "200",
+      "expected_response_message": "",
+      "parentFolder": "auth",
+      "groupName": "Login"
+    },
+    {
+      "test_id": "lg_02",
+      "name": "Login with invalid credentials",
+      "method": "POST",
+      "api": "v1/auth/login",
+      "body": {
+        "username": "admin001",
+        "password": "12345678"
+      },
+      "auth_token": "NO",
+      "expected_code": "401",
+      "expected_response_message": "",
+      "parentFolder": "auth",
+      "groupName": "Login"
+    },
+    {
+      "test_id": 3,
+      "method": "GET",
+      "api": "v1/defense/profiles/all/0",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all defense profiles",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "defense_profile",
+      "groupName": "Get all defense profiles"
+    },
+    {
+      "test_id": 4,
+      "method": "GET",
+      "api": "v1/defense/profiles/active",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all active defense profiles",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "defense_profile",
+      "groupName": "Get all active defense profiles"
+    },
+    {
+      "test_id": 5,
+      "method": "GET",
+      "api": "v1/defense/profiles/active/config/udpFlood",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get defense profile attack type udpFlood config",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "defense_profile",
+      "groupName": "Get defense profile attack type udpFlood config"
+    },
+    {
+      "test_id": 6,
+      "method": "GET",
+      "api": "v1/defense/profiles/active/attacks/rate",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all threshold by active defense profile",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "defense_profile",
+      "groupName": "Get all threshold by active defense profile"
+    },
+    {
+      "test_id": 7,
+      "method": "POST",
+      "api": "v1/defense/profiles/",
+      "body": {
+        "DefenseProfileName": "TestProfileName_001",
+        "DefenseProfileDescription": "TestProfileDescription",
+        "DetectionTime": 1,
+        "DefenseMode": "classified",
+        "ICMPFloodEnable": true,
+        "ICMPFloodThreshold": 1000,
+        "ICMPFloodRate": 1000,
+        "TCPFragmentEnable": true,
+        "UDPFragmentEnable": true,
+        "SYNFloodEnable": true,
+        "SYNFloodSYNThreshold": 1000,
+        "SYNFloodACKThreshold": 1000,
+        "SYNFloodWhiteListTimeOut": 30,
+        "UDPFloodEnable": true,
+        "UDPFloodThreshold": 1000,
+        "UDPFloodRate": 1000,
+        "DNSFloodEnable": true,
+        "DNSFloodThreshold": 1000,
+        "LandAttackEnable": true,
+        "IPSecIKEEnable": true,
+        "IPSecIKEThreshold": 1000,
+        "HTTPFloodEnable": true,
+        "HTTPSFloodEnable": true
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "46",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Insert defense profile",
+      "parentFolder": "defense_profile",
+      "groupName": "Insert defense profile"
+    },
+    {
+      "test_id": 8,
+      "method": "PATCH",
+      "api": "v1/defense/profiles/4",
+      "body": {
+        "DefenseMode": "classified",
+        "SYNFloodEnable": 0,
+        "TCPFragmentEnable": 0,
+        "LandAttackEnable": 0,
+        "UDPFloodEnable": 0,
+        "UDPFragmentEnable": 0,
+        "IPSecIKEEnable": 0,
+        "ICMPFloodEnable": 0,
+        "DNSFloodEnable": 0,
+        "HTTPFloodEnable": 0,
+        "HTTPSFloodEnable": 0
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "32",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Update defense profile",
+      "parentFolder": "defense_profile",
+      "groupName": "Update defense profile"
+    },
+    {
+      "test_id": 9,
+      "method": "POST",
+      "api": "v1/defense/profiles/3/apply",
+      "body": [
+        {
+          "name": "eth1",
+          "date": "2025/09/24 16:16:11"
+        },
+        {
+          "name": "eth5",
+          "date": "2025/09/24 16:16:11"
+        },
+        {
+          "name": "eth6",
+          "date": "2025/09/24 16:16:11"
+        },
+        {
+          "name": "eth7",
+          "date": "2025/09/24 16:16:11"
+        },
+        {
+          "name": "eth3",
+          "date": "2025/09/24 16:16:11"
+        },
+        {
+          "name": "eth4",
+          "date": "2025/09/24 16:16:11"
+        },
+        {
+          "name": "eth8",
+          "date": "2025/09/24 16:16:11"
+        }
+      ],
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "40",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Apply defense profile",
+      "parentFolder": "defense_profile",
+      "groupName": "Apply defense profile"
+    },
+    {
+      "test_id": 10,
+      "method": "DELETE",
+      "api": "v1/defense/profiles/17",
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "200",
+      "custom_expected_data": "database updated",
+      "name": "Delete defense profile",
+      "body": {},
+      "parentFolder": "defense_profile",
+      "groupName": "Delete defense profile"
+    },
+    {
+      "test_id": 11,
+      "method": "GET",
+      "api": "v1/defense/interfaces",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all device interfaces",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "device_interfaces",
+      "groupName": "Get all device interfaces"
+    },
+    {
+      "test_id": 12,
+      "method": "GET",
+      "api": "v1/defense/interfaces/mirroring",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all device interfaces (mirroring)",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "device_interfaces",
+      "groupName": "Get all device interfaces (mirroring)"
+    },
+    {
+      "test_id": 13,
+      "method": "PATCH",
+      "api": "v1/defense/interfaces/2",
+      "body": {
+        "ports": [
+          {
+            "InterfaceId": 2,
+            "InterfaceName": "eth2",
+            "InterfaceType": "outbound",
+            "InterfaceProtectionMode": "IP",
+            "DefenseProfileId": 4
+          }
+        ]
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "6",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Update device interfaces",
+      "parentFolder": "device_interfaces",
+      "groupName": "Update device interfaces"
+    },
+    {
+      "test_id": 14,
+      "method": "POST",
+      "api": "v1/defense/interfaces/mirroring",
+      "body": {
+        "MonitorInterfaceId": 5,
+        "MirrorInterfaceId": 1,
+        "MirrorSetting": "Egress",
+        "MirrorType": [
+          "Protocol",
+          "Source Port",
+          "Dest Port",
+          "Source IP",
+          "Dest Mac",
+          "Source Mac",
+          "Dest IP"
+        ],
+        "Value": "{\"DestMac\":\"00:1A:2B:3C:4D:5F\",\"SourceMac\":\"00:1A:2B:3C:4D:5E\",\"DestPort\":\"2010\",\"SourcePort\":\"20202\",\"DestIPv4\":\"1.1.1.2\",\"SourceIPv4\":\"1.1.1.1\",\"Protocol\":\"TCP\"}"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "16",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Create mirroring interface",
+      "parentFolder": "device_interfaces",
+      "groupName": "Create mirroring interface"
+    },
+    {
+      "test_id": 15,
+      "method": "PATCH",
+      "api": "v1/defense/interfaces/mirroring/5",
+      "body": {
+        "MonitorInterfaceId": 5,
+        "MirrorInterfaceId": 1,
+        "MirrorSetting": "Egress",
+        "MirrorType": [],
+        "Value": "{}"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "14",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Update mirroring interface",
+      "parentFolder": "device_interfaces",
+      "groupName": "Update mirroring interface"
+    },
+    {
+      "test_id": 16,
+      "method": "DELETE",
+      "api": "v1/defense/interfaces/mirroring/5",
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "4",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Delete mirroring interface",
+      "body": {},
+      "parentFolder": "device_interfaces",
+      "groupName": "Delete mirroring interface"
+    },
+    {
+      "test_id": 17,
+      "method": "GET",
+      "api": "v1/defense/ipsec/all/0",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all ipsec profiles",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "ipsec",
+      "groupName": "Get all IPSec profiles"
+    },
+    {
+      "test_id": 18,
+      "name": "Insert IPSec profile without uploading certificates",
+      "method": "POST",
+      "api": "v1/defense/ipsec/combined",
+      "body": {
+        "profileData": "{\"ProfileName\":\"NoCertProfile_001\",\"ProfileDescription\":\"Profile without certificates\",\"LocalGateway\":\"192.168.1.1\",\"SubnetLocalGateway\":\"192.168.1.0/24\",\"RemoteGateway\":\"203.0.113.1\",\"SubnetRemoteGateway\":\"10.0.0.0/16\",\"ConnectionCount\":1,\"IKEVersion\":\"2\",\"Mode\":\"main\",\"ESPAHProtocol\":\"esp\",\"EncryptionAlgorithm\":\"aes256\",\"HashAlgorithm\":\"sha256\",\"Enable\":true}"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "15",
+      "custom_expected_data": "no certs uploaded|mainC updated|database updated",
+      "parentFolder": "ipsec",
+      "groupName": "Insert IPSec profile (no certificates)"
+    },
+    {
+      "test_id": 19,
+      "method": "PATCH",
+      "api": "v1/defense/ipsec/1",
+      "body": {
+        "ProfileName": "IpSec Profile For Testing",
+        "ProfileDescription": "Sample description",
+        "LocalGateway": "1.1.1.1",
+        "SubnetLocalGateway": "1.1.1.1",
+        "RemoteGateway": "1.1.1.1;1.1.1.1;1.1.1.1",
+        "SubnetRemoteGateway": "1.1.1.1;1.1.1.1;1.1.1.1",
+        "ConnectionCount": 3,
+        "IKEVersion": "v2",
+        "Mode": "transport",
+        "ESPAHProtocol": "ESP",
+        "IKEReauthTime": 360,
+        "EncryptionAlgorithm": "aes-192",
+        "HashAlgorithm": "md5",
+        "ReKeyTime": 8640,
+        "Enable": 0
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "10",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Update ipsec profile",
+      "parentFolder": "ipsec",
+      "groupName": "Update IPSec profile"
+    },
+    {
+      "test_id": 20,
+      "method": "DELETE",
+      "api": "v1/defense/ipsec/1",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Delete ipsec profile",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "ipsec",
+      "groupName": "Delete IPSec profile"
+    },
+    {
+      "test_id": 21,
+      "method": "GET",
+      "api": "v1/defense/address/common/white",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all protected addresses",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "network_addresses",
+      "groupName": "Get all protected addresses"
+    },
+    {
+      "test_id": 22,
+      "method": "GET",
+      "api": "v1/defense/address/common/black",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all blocked addresses",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "network_addresses",
+      "groupName": "Get all blocked addresses"
+    },
+    {
+      "test_id": 23,
+      "method": "GET",
+      "api": "v1/defense/address/vpn/white",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all VPN allowed addresses",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "network_addresses",
+      "groupName": "Get all VPN allowed addresses"
+    },
+    {
+      "test_id": 24,
+      "method": "GET",
+      "api": "v1/defense/address/http/black",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all HTTP blocked addresses",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "network_addresses",
+      "groupName": "Get all HTTP blocked addresses"
+    },
+    {
+      "test_id": 26,
+      "method": "POST",
+      "api": "v1/defense/address/bulk-delete-by-file",
+      "body": [
+        {
+          "Address": "73.46.170.70",
+          "AddressVersion": "IPv4"
+        }
+      ],
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "2",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Delete network addresses by address and version list",
+      "parentFolder": "network_addresses",
+      "groupName": "Delete network addresses by address and version list"
+    },
+    {
+      "test_id": 25,
+      "method": "POST",
+      "api": "v1/defense/address/bulk-delete",
+      "body": {
+        "addressIds": [
+          359,
+          360
+        ]
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "200",
+      "expected_response_time": "2",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Delete network addresses by ids",
+      "parentFolder": "network_addresses",
+      "groupName": "Delete network addresses by ids"
+    },
+    {
+      "test_id": 27,
+      "method": "POST",
+      "api": "v1/defense/address/common/white",
+      "body": {
+        "Address": "1.2.3.4",
+        "AddressVersion": "IPv4",
+        "InterfaceId": 1,
+        "Port": "eth1"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "201",
+      "expected_response_time": "2",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Insert protected addresses",
+      "parentFolder": "network_addresses",
+      "groupName": "Insert protected addresses"
+    },
+    {
+      "test_id": 28,
+      "method": "POST",
+      "api": "v1/defense/address/common/black",
+      "body": {
+        "Address": "2.3.4.5",
+        "AddressVersion": "IPv4",
+        "InterfaceId": 1,
+        "Port": "eth1"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "201",
+      "expected_response_time": "2",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Insert blocked addresses",
+      "parentFolder": "network_addresses",
+      "groupName": "Insert blocked addresses"
+    },
+    {
+      "test_id": 29,
+      "method": "POST",
+      "api": "v1/defense/address/vpn/white",
+      "body": {
+        "Address": "3.4.5.6",
+        "AddressVersion": "IPv4",
+        "InterfaceId": 1,
+        "Port": null
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "201",
+      "expected_response_time": "2",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Insert VPN allowed addresses",
+      "parentFolder": "network_addresses",
+      "groupName": "Insert VPN allowed addresses"
+    },
+    {
+      "test_id": 30,
+      "method": "POST",
+      "api": "v1/defense/address/http/black",
+      "body": {
+        "Address": "5.6.7.8",
+        "AddressVersion": "IPv4",
+        "InterfaceId": 1,
+        "Port": null
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress|progress",
+      "expected_code": "201",
+      "expected_response_time": "2",
+      "custom_expected_data": "mainC updated|database updated",
+      "name": "Insert HTTP blocked addresses",
+      "parentFolder": "network_addresses",
+      "groupName": "Insert HTTP blocked addresses"
+    },
+    {
+      "test_id": 31,
+      "method": "GET",
+      "api": "v1/config/profiles/",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all config profiles",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "config_profiles",
+      "groupName": "Get all config profiles"
+    },
+    {
+      "test_id": 32,
+      "method": "GET",
+      "api": "v1/config/profiles/names",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "name": "Get all config profile names",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "body": {},
+      "parentFolder": "config_profiles",
+      "groupName": "Get all config profile names"
+    },
+    {
+      "test_id": 33,
+      "method": "POST",
+      "api": "v1/config/profiles/create",
+      "body": {
+        "name": "NewTestProfile"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "201",
+      "custom_expected_data": "database updated",
+      "name": "Create new config profile 01",
+      "parentFolder": "config_profiles",
+      "groupName": "Create new config profile"
+    },
+    {
+      "test_id": 34,
+      "method": "POST",
+      "api": "v1/config/profiles/create",
+      "body": {
+        "name": "TestProfile"
+      },
+      "auth_token": "GET",
+      "expected_code": "201",
+      "name": "Create new config profile 02",
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "parentFolder": "config_profiles",
+      "groupName": "Create new config profile"
+    },
+    {
+      "test_id": "ap_cf_01",
+      "name": "apply config profile 01",
+      "method": "POST",
+      "api": "v1/config/profiles/apply",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "expected_response_time": "1",
+      "body": {
+        "configProfileName": "NewTestProfile"
+      },
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "parentFolder": "config_profiles",
+      "groupName": "apply config profile"
+    },
+    {
+      "test_id": "cp_01",
+      "name": "apply inactive config profile to active profile",
+      "method": "POST",
+      "api": "v1/config/profiles/apply",
+      "auth_token": "GET",
+      "expected_code": "200",
+      "expected_response_time": "1",
+      "body": {
+        "configProfileName": "NewTestProfile"
+      },
+      "custom_expected_field": "",
+      "custom_expected_data": "",
+      "parentFolder": "config_profiles",
+      "groupName": "apply config profile"
+    },
+    {
+      "test_id": 35,
+      "method": "POST",
+      "api": "v1/config/profiles/save-antiddos",
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "200",
+      "custom_expected_data": "database updated",
+      "name": "Save antiDDos config to active profile",
+      "body": {},
+      "parentFolder": "config_profiles",
+      "groupName": "save attributes to config profile"
+    },
+    {
+      "test_id": 37,
+      "method": "POST",
+      "api": "v1/config/profiles/save-ipsec",
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "200",
+      "custom_expected_data": "database updated",
+      "name": "Save IPSec config to active profile",
+      "body": {},
+      "parentFolder": "config_profiles",
+      "groupName": "save attributes to config profile"
+    },
+    {
+      "test_id": 39,
+      "method": "POST",
+      "api": "v1/config/profiles/save-all",
+      "body": {
+        "configProfileName": "TestProfile"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "200",
+      "custom_expected_data": "database updated",
+      "name": "Save all configs to specified profile 011111",
+      "parentFolder": "config_profiles",
+      "groupName": "save attributes to config profile"
+    },
+    {
+      "test_id": 38,
+      "method": "POST",
+      "api": "v1/config/profiles/save-ipsec-as",
+      "body": {
+        "configProfileName": "TestProfile"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "200",
+      "custom_expected_data": "database updated",
+      "name": "Save IPSec config to specified profile",
+      "parentFolder": "config_profiles",
+      "groupName": "save attributes to config profile"
+    },
+    {
+      "test_id": 36,
+      "method": "POST",
+      "api": "v1/config/profiles/save-antiddos-as",
+      "body": {
+        "configProfileName": "TestProfile"
+      },
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "200",
+      "custom_expected_data": "database updated",
+      "name": "Save AntiDDos config to specified profile",
+      "parentFolder": "config_profiles",
+      "groupName": "save attributes to config profile"
+    },
+    {
+      "test_id": 40,
+      "method": "DELETE",
+      "api": "v1/config/profiles/1",
+      "auth_token": "GET",
+      "custom_expected_field": "progress",
+      "expected_code": "200",
+      "custom_expected_data": "database updated",
+      "name": "Delete config profile",
+      "body": {},
+      "parentFolder": "config_profiles",
+      "groupName": "Delete config profile"
+    }
+  ]
+}
