@@ -686,9 +686,9 @@
       "groupName": "save attributes to config profile"
     },
     {
-      "test_id": 39,
+      "test_id": 36,
       "method": "POST",
-      "api": "v1/config/profiles/save-all",
+      "api": "v1/config/profiles/save-antiddos-as",
       "body": {
         "configProfileName": "TestProfile"
       },
@@ -696,7 +696,7 @@
       "custom_expected_field": "progress",
       "expected_code": "200",
       "custom_expected_data": "database updated",
-      "name": "Save all configs to specified profile 011111",
+      "name": "Save AntiDDos config to specified profile",
       "parentFolder": "config_profiles",
       "groupName": "save attributes to config profile"
     },
@@ -716,9 +716,9 @@
       "groupName": "save attributes to config profile"
     },
     {
-      "test_id": 36,
+      "test_id": 39,
       "method": "POST",
-      "api": "v1/config/profiles/save-antiddos-as",
+      "api": "v1/config/profiles/save-all",
       "body": {
         "configProfileName": "TestProfile"
       },
@@ -726,7 +726,9 @@
       "custom_expected_field": "progress",
       "expected_code": "200",
       "custom_expected_data": "database updated",
-      "name": "Save AntiDDos config to specified profile",
+      "name": "Save all configs to specified profile",
+      "expected_response_time": "",
+      "expected_response_message": "",
       "parentFolder": "config_profiles",
       "groupName": "save attributes to config profile"
     },

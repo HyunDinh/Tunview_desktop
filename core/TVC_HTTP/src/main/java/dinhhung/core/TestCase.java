@@ -59,11 +59,20 @@ public class TestCase {
         this.authTokenStatus        = caseNode.has("auth_token") ? caseNode.get("auth_token").asText() : "NO";
         this.displayFullResponse    = caseNode.has("display_full_response") && "TRUE".equalsIgnoreCase(caseNode.get("display_full_response").asText());
 
-        this.expectedCode = caseNode.has("expected_code") ? caseNode.get("expected_code").asText() : null;
-        this.expectedResponseMessage = caseNode.has("expected_response_message") ? caseNode.get("expected_response_message").asText() : null;
-        this.expectedResponseTime = caseNode.has("expected_response_time") ? caseNode.get("expected_response_time").asText() : null;
-        this.customExpectedField = caseNode.has("custom_expected_field") ? caseNode.get("custom_expected_field").asText() : null;
-        this.customExpectedData = caseNode.has("custom_expected_data") ? caseNode.get("custom_expected_data").asText() : null;
+        this.expectedCode = (caseNode.has("expected_code") && !caseNode.get("expected_code").asText().isBlank())
+                ? caseNode.get("expected_code").asText() : null;
+
+        this.expectedResponseMessage = (caseNode.has("expected_response_message") && !caseNode.get("expected_response_message").asText().isBlank())
+                ? caseNode.get("expected_response_message").asText() : null;
+
+        this.expectedResponseTime = (caseNode.has("expected_response_time") && !caseNode.get("expected_response_time").asText().isBlank())
+                ? caseNode.get("expected_response_time").asText() : null;
+
+        this.customExpectedField = (caseNode.has("custom_expected_field") && !caseNode.get("custom_expected_field").asText().isBlank())
+                ? caseNode.get("custom_expected_field").asText() : null;
+
+        this.customExpectedData = (caseNode.has("custom_expected_data") && !caseNode.get("custom_expected_data").asText().isBlank())
+                ? caseNode.get("custom_expected_data").asText() : null;
 
         this.responseValidator = new ResponseValidator()
                 .setExpectedCode(this.expectedCode)
