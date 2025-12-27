@@ -37,3 +37,17 @@
   font-size: 12px;
   min-height: 50px;
 }
+
+/* TREE SPLITTER */
+.tree-splitter {
+    width: 5px;
+    height: 100%;
+    background-color: #45494a;
+    cursor: ew-resize; /* Con trỏ kéo ngang */
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.tree-splitter:hover {
+    background-color: #007acc;
+}

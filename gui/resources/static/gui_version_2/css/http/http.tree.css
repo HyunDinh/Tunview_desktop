@@ -1,6 +1,8 @@
 .http-tree {
   width: 500px;
-  /* Rộng hơn tí cho tree sâu */
+  min-width: 150px;
+  max-width: 1000px;
+  flex-shrink: 0;
   background-color: var(--main-color-2);
   border-right: 1px solid #45494a;
   padding: 10px;
@@ -26,6 +28,8 @@
 
 .http-tree .tree-node {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   cursor: pointer;
 }
@@ -49,18 +53,26 @@
   outline: 1px solid #ffffff;
 }
 
-.draggable-module, .draggable-group, .draggable-case { cursor: grab; }
-.draggable-module.dragging, .draggable-group.dragging, .draggable-case.dragging { 
-  opacity: 0.5; 
-  background: rgba(255, 255, 255, 0.1); 
-  border: 1px dashed #666; 
+.draggable-module,
+.draggable-group,
+.draggable-case {
+  cursor: grab;
 }
-.drag-placeholder { 
-  height: 3px; 
-  background: #ff9800; 
-  margin: 4px 0; 
-  border-radius: 2px; 
-  list-style: none; 
+
+.draggable-module.dragging,
+.draggable-group.dragging,
+.draggable-case.dragging {
+  opacity: 0.5;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed #666;
+}
+
+.drag-placeholder {
+  height: 3px;
+  background: #ff9800;
+  margin: 4px 0;
+  border-radius: 2px;
+  list-style: none;
 }
 
 .tree-children {

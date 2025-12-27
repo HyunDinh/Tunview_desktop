@@ -2,6 +2,7 @@ window.HttpPageUI = {
   // --- STATE ---
   resizeTimer: null,
   isResizing: false,
+  isResizingTree: false,
   rightClickedGroup: null,
   rightClickedModule: null,
   rightClickedCaseName: null,
@@ -20,14 +21,53 @@ window.HttpPageUI = {
   },
 
   bindSplitter() {
-    const httpSplitter = document.getElementById('http-splitter');
     const httpPage = document.getElementById('page-http');
-    const httpView = httpPage.querySelector('.http-view');
-    const httpRun = httpPage.querySelector('.http-run');
+    const httpView = httpPage?.querySelector('.http-view');
+    const httpRun = httpPage?.querySelector('.http-run');
+    const httpSplitter = document.getElementById('http-splitter'); // Splitter Ngang (Lên/Xuống)
 
-    if (!httpSplitter || !httpPage) return;
+    const treeSplitter = document.getElementById('http-tree-splitter'); // Splitter Dọc (Trái/Phải)
+    const httpTree = document.querySelector('.http-tree');
 
+    if (!httpPage || !httpSplitter) return;
+
+    // --- 1. XỬ LÝ SPLITTER DỌC (TREE & DETAIL) ---
+    if (treeSplitter && httpTree) {
+      treeSplitter.addEventListener('mousedown', e => {
+        e.preventDefault();
+        this.isResizingTree = true;
+        document.body.style.cursor = 'ew-resize';
+
+        const startX = e.clientX;
+        const startWidth = httpTree.offsetWidth;
+
+        const moveHandler = me => {
+          if (!this.isResizingTree) return;
+          const newWidth = startWidth + (me.clientX - startX);
+
+          // Giới hạn: 150px - 800px
+          if (newWidth > 150 && newWidth < 800) {
+            httpTree.style.width = `${newWidth}px`;
+            // Quan trọng: dùng flexBasis để đảm bảo flexbox nhận diện đúng kích thước mới
+            httpTree.style.flexBasis = `${newWidth}px`;
+          }
+        };
+
+        const upHandler = () => {
+          this.isResizingTree = false;
+          document.body.style.cursor = 'default';
+          document.removeEventListener('mousemove', moveHandler);
+          document.removeEventListener('mouseup', upHandler);
+        };
+
+        document.addEventListener('mousemove', moveHandler);
+        document.addEventListener('mouseup', upHandler);
+      });
+    }
+
+    // --- 2. XỬ LÝ SPLITTER NGANG (VIEW & RUN) ---
     httpSplitter.addEventListener('mousedown', e => {
+      e.preventDefault();
       this.isResizing = true;
       const boundingRect = httpPage.getBoundingClientRect();
       document.body.style.cursor = 'ns-resize';
@@ -37,11 +77,10 @@ window.HttpPageUI = {
         const totalHeight = boundingRect.height;
         const splitterH = httpSplitter.offsetHeight;
 
-        // Tính toán vị trí mới
         let newViewHeight = me.clientY - boundingRect.top;
         let remainRunHeight = totalHeight - newViewHeight - splitterH;
 
-        // Ràng buộc Min-Height (100px cho View, 50px cho Run)
+        // Ràng buộc Min-Height
         if (newViewHeight < 100) {
           newViewHeight = 100;
           remainRunHeight = totalHeight - 100 - splitterH;
@@ -61,10 +100,12 @@ window.HttpPageUI = {
         document.removeEventListener('mousemove', moveHandler);
         document.removeEventListener('mouseup', upHandler);
       };
+
       document.addEventListener('mousemove', moveHandler);
       document.addEventListener('mouseup', upHandler);
     });
 
+    // --- 3. XỬ LÝ KHI RESIZE TRÌNH DUYỆT ---
     window.addEventListener('resize', () => {
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => this.initializeSplitHeights(), 20);
@@ -212,9 +253,11 @@ window.HttpPageUI = {
 
       // Hiển thị/Ẩn các option tương ứng
       document.getElementById('ctx-new-group').style.display = type === 'module' ? 'block' : 'none';
-      document.getElementById('ctx-delete-module').style.display = type === 'module' ? 'block' : 'none';
+      document.getElementById('ctx-delete-module').style.display =
+        type === 'module' ? 'block' : 'none';
       document.getElementById('ctx-new-case').style.display = type === 'group' ? 'block' : 'none';
-      document.getElementById('ctx-delete-group').style.display = type === 'group' ? 'block' : 'none';
+      document.getElementById('ctx-delete-group').style.display =
+        type === 'group' ? 'block' : 'none';
       document.getElementById('ctx-delete-case').style.display = type === 'case' ? 'block' : 'none';
 
       menu.style.left = `${Math.min(e.clientX, window.innerWidth - menu.offsetWidth)}px`;
@@ -243,16 +286,16 @@ window.HttpPageUI = {
 
         if (this.deleteType === 'module') {
           delete testcases[this.rightClickedModule];
-        } 
-        else if (this.deleteType === 'group') {
+        } else if (this.deleteType === 'group') {
           if (testcases[this.rightClickedModule]) {
             testcases[this.rightClickedModule] = testcases[this.rightClickedModule].filter(
               g => g.group !== this.rightClickedGroup
             );
           }
-        } 
-        else if (this.deleteType === 'case') {
-          const group = testcases[this.rightClickedModule]?.find(g => g.group === this.rightClickedGroup);
+        } else if (this.deleteType === 'case') {
+          const group = testcases[this.rightClickedModule]?.find(
+            g => g.group === this.rightClickedGroup
+          );
           if (group) {
             group.cases = group.cases.filter((c, idx) => {
               const cName = c.name || `Case ${idx + 1}`;
@@ -263,18 +306,18 @@ window.HttpPageUI = {
 
         // Lưu xuống file và làm mới cây thư mục
         await this.saveAndRefreshTree(`${this.deleteType} deleted`, testcases);
-        
+
         // Đóng modal và menu
         document.getElementById('delete-confirm-modal').classList.add('hidden');
         this.closeContextMenu();
 
         // Xóa trắng vùng Detail nếu Case đang xem vừa bị xóa
         if (this.deleteType === 'case' && window.HttpPageDetail) {
-           document.getElementById('http-detail-content').innerHTML = '';
-           document.getElementById('http-save-btn').style.display = 'none';
-           // Cập nhật tiêu đề detail về mặc định
-           const titleEl = document.querySelector('.detail-header h3');
-           if (titleEl) titleEl.textContent = 'Select a testcase';
+          document.getElementById('http-detail-content').innerHTML = '';
+          document.getElementById('http-save-btn').style.display = 'none';
+          // Cập nhật tiêu đề detail về mặc định
+          const titleEl = document.querySelector('.detail-header h3');
+          if (titleEl) titleEl.textContent = 'Select a testcase';
         }
       };
     }
